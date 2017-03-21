@@ -1,0 +1,35 @@
+
+#include <opencv2/opencv.hpp>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+using namespace cv;
+
+int main(int argc, char** argv){
+	Mat image; 
+	image = imread("20080.jpg", IMREAD_COLOR);
+    
+    cout << image.cols <<" " << image.rows << endl;
+    
+    for(int i = 0; i < image.cols; i++){
+      for(int j = 0; j < image.rows-3; j++){
+        //cout << i << " " << j << endl;
+       	//CvPoint temp(i,j);
+      	//image.at<double>(temp)=256;
+	for (int k = 0; k < 3; k++) {
+	  image.at(i, j)[k] = 255;
+	} //for
+	//image.at<char>(i, j) = 255;
+      }
+    }
+
+    namedWindow("Display Window", WINDOW_AUTOSIZE);
+    imshow("Display Window", image);
+
+    waitKey(0);
+
+    return 0;
+
+}
+
