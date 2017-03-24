@@ -147,8 +147,8 @@ intrin.h
 -
 
 /usr/local/include/opencv2/core/cvstd.hpp
-opencv2/core/cvdef.h
-/usr/local/include/opencv2/core/opencv2/core/cvdef.h
+opencv2
+/usr/local/include/opencv2/core/opencv2
 cstddef
 -
 cstring
