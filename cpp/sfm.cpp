@@ -20,7 +20,8 @@ int main(int argc, char** argv){
     
     int ordinal;
     
-    String verbose = argv[1];
+    String verbose = "a";
+    if(argc >1) verbose = argv[1];
     bool v = false;
 
     if(verbose == "-v"){
@@ -30,8 +31,9 @@ int main(int argc, char** argv){
     else v = false;
     
     if(v) cout << "before array" << endl;
-    
+ 
     // Create an empty 3D array of dimension (rows,col,image)
+
     char *** finalArray = new char**[nrows]; 
     for(int i = 0; i < nrows;i++){
         finalArray[i]= new char*[ncols*3];
@@ -48,6 +50,7 @@ int main(int argc, char** argv){
 
     // Create image object
     Mat image;
+    Mat newImage;
    
     // Read in the directory images2
     for(int i = 1; i <= numberOfImages; i++){
@@ -89,6 +92,7 @@ int main(int argc, char** argv){
         }
         
     }
+    cout << "Test" << endl;
         // Created the 3D image with (row,col,image)    
    
 
@@ -101,6 +105,7 @@ int main(int argc, char** argv){
         
     for(int i = 0; i <numberOfImages; i++){
         for(int j = 0; j< ncols*3; j++){
+
             // Prints the current row col.
             if(v) cout << i <<" " << j << endl;
 
@@ -108,37 +113,35 @@ int main(int argc, char** argv){
             newImage.at<uchar>(i,j) = finalArray[ncols/2][j][i];
         }
     }
-    
+
+     cout << "Final2" << endl; 
+   
     // Display the image
-    namedWindow("Display Window", WINDOW_AUTOSIZE);
-    imshow("Display Window", newImage);
-    waitKey(0);
+    cout << "Final3" << endl; 
 
-    // Write the image
-    //mwrite("./out/test.jpg", newImage);
+    //imshow("Display Window", newImage);
+
+    cout << "Final4" << endl; 
+
+    //waitKey(0);
+    cout << "Final5" << endl; 
+   
     
-    /*
-    for(int i = 0; i < nrows;i++){
-        finalArray[i]= new char*[ncols*3];
-        for(int j = 0; j < ncols*3; j++){
-            for(int im = 0; im < numberOfImages;im++){
-                delete(finalArray[i][j][im]);
-            }
-        }
-    }
+    // Write the image
+    imwrite("./out/test.jpg", newImage);
 
-    for(int i = 0; i < nrows;i++){
-        for(int j = 0; j < ncols*3; j++){
-            delete(finalArray[i][j]);
-        }
+    
+    for(int i = 0; i < nrows; i++){
+        for (int j=0; j < ncols*3; j++){
+            free(finalArray[i][j]);
+        }    
+        free(finalArray[i]);
     }
- 
-    for(int i = 0; i < nrows;i++){
-        delete(finalArray[i]);
-    }
+    free(finalArray);
 
-    delete(finalArray); 
-    */
+    newImage.release();
+    image.release();
+
     return 0;
 
 }
